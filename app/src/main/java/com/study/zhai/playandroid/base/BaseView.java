@@ -2,6 +2,8 @@ package com.study.zhai.playandroid.base;
 
 public interface BaseView {
 
+    void showNormal();
+
     /**
      * Show error
      */

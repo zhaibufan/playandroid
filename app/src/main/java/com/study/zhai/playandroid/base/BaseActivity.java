@@ -18,15 +18,17 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder bind;
+    protected Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
+        activity = this;
         initStatusColor();
-        initData();
         initView();
+        initData();
     }
 
     public abstract int getLayoutId();

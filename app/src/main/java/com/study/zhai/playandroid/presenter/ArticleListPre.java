@@ -1,12 +1,9 @@
 package com.study.zhai.playandroid.presenter;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.study.zhai.playandroid.api.ApiService;
 import com.study.zhai.playandroid.api.ApiStore;
 import com.study.zhai.playandroid.base.BasePresenter;
-import com.study.zhai.playandroid.base.BaseView;
 import com.study.zhai.playandroid.contract.HomeListContract;
 
 import io.reactivex.Observer;
