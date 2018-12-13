@@ -22,7 +22,9 @@ public class ConstantUtil {
     /**
      * 访问网络 基础 url
      */
-    public static final String BASE_URL = "http://www.wanandroid.com/";
+//    public static final String BASE_URL = "http://www.wanandroid.com/";
+//    public static final String BASE_URL = "https://sapi.daishumovie.com/";
+    public static final String BASE_URL = "https://www.baidu.com/";
 
     /**
      * ssl key
