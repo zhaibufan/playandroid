@@ -1,5 +1,7 @@
 package com.study.zhai.playandroid.util;
 
+import android.os.Environment;
+
 /**
  * 常量
  *
@@ -77,4 +79,6 @@ public class ConstantUtil {
      * 搜索界面 跳转 搜索界面界面 key
      */
     public static final String SEARCH_RESULT_KEY = "search_result_key";
+
+    public static final String SD_CARD_PATH = Environment.getExternalStorageState();
 }

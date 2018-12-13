@@ -1,56 +1,28 @@
 package com.study.zhai.playandroid;
 
-import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
-import com.study.zhai.playandroid.base.BaseResultActivity;
-import com.study.zhai.playandroid.contract.HomeListContract;
-import com.study.zhai.playandroid.presenter.ArticleListPre;
+import com.study.zhai.playandroid.base.BaseActivity;
 
-
-public class MainActivity extends BaseResultActivity implements HomeListContract.View {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
-    private Handler mHandler = new Handler();
-    private ArticleListPre pre;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }
-
     @Override
     public void initView() {
-        super.initView();
     }
-
     @Override
     public void initData() {
-        Log.d(TAG, "initData");
-        pre = new ArticleListPre();
-        pre.attachView(this);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pre.getArticleList(4);
-            }
-        }, 2000);
     }
 
-    @Override
-    public void getDemoResultOK(String result) {
-        showNormal();
-        Log.d(TAG, "result = " +result);
+    public void download(View v) {
+        Log.d(TAG, "down");
+
     }
 
-    @Override
-    public void getDemoResultErr(String info) {
-        showError(info);
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

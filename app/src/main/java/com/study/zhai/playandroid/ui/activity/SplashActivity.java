@@ -35,6 +35,7 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void onNext(Long o) {
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
                     }
 
                     @Override
