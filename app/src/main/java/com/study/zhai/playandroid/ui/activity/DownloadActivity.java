@@ -1,15 +1,27 @@
 package com.study.zhai.playandroid.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.R;
-import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.base.BaseResultActivity;
 import com.study.zhai.playandroid.contract.DownloadContract;
 import com.study.zhai.playandroid.presenter.DownloadFilePre;
+import com.study.zhai.playandroid.util.DecodeBitmapUtils;
+import com.study.zhai.playandroid.util.DpToPxUtils;
 
-public class DownloadActivity extends BaseActivity implements DownloadContract.View {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class DownloadActivity extends BaseResultActivity implements DownloadContract.View {
+
+    @BindView(R.id.iv_image)
+    ImageView ivImage;
 
     private static final String TAG = "DownloadActivity";
     private DownloadFilePre pre;
@@ -27,12 +39,14 @@ public class DownloadActivity extends BaseActivity implements DownloadContract.V
 
     }
 
+    public void downloadFile(View view) {
+        pre.downloadFile(PICTURE_URL);
+    }
+
     @Override
     public void initData() {
         pre = new DownloadFilePre();
         pre.attachView(this);
-
-        pre.downloadFile(VIDEO_URL);
     }
 
     @Override
@@ -42,52 +56,39 @@ public class DownloadActivity extends BaseActivity implements DownloadContract.V
 
     @Override
     public void onProgress(int currentLength) {
-        Log.d(TAG, "onProgress currentLength = " +currentLength);
+        Log.d(TAG, "onProgress currentLength = " + currentLength);
     }
 
     @Override
-    public void onFinish(String localPath) {
+    public void onFinish(final String localPath) {
         Log.d(TAG, "onFinish");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // 通过BitmapFactory解析图片
+//                Bitmap bitmap = DecodeBitmapUtils.compressBySize(localPath, DpToPxUtils.dp2px(DownloadActivity.this, 100), DpToPxUtils.dp2px(DownloadActivity.this, 100));
+//                ivImage.setImageBitmap(bitmap);
+                // 通过Glide加载图片
+                Glide.with(DownloadActivity.this).load(localPath).into(ivImage);
+            }
+        });
     }
 
     @Override
     public void onFailure(String erroInfo) {
-        Log.d(TAG, "onFailure");
-    }
-
-    @Override
-    public void showNormal() {
-
-    }
-
-    @Override
-    public void showError(String err) {
-        Log.d(TAG, "showError");
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void cancelLoading() {
-
-    }
-
-    @Override
-    public void showEmpty() {
-
-    }
-
-    @Override
-    public void reload() {
-
+        Log.d(TAG, "onFailure --- " + erroInfo);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         pre.detachView();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

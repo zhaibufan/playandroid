@@ -27,6 +27,7 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
     @Override
     public void initData() {
         Log.d(TAG, "initData");
+        showLoading();
         pre = new ArticleListPre();
         pre.attachView(this);
         mHandler.postDelayed(new Runnable() {

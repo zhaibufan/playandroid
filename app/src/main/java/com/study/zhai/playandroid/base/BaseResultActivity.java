@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.study.zhai.playandroid.R;
+import com.study.zhai.playandroid.widget.LoadingDialog;
 
 public abstract class BaseResultActivity extends BaseActivity implements BaseView{
 
@@ -14,10 +15,10 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
     private static final int LOADING_STATE = 1;
     public static final int ERROR_STATE = 2;
     public static final int EMPTY_STATE = 3;
-    private int currentState = LOADING_STATE;
+    private int currentState = NORMAL_STATE;
 
     private View mErrorView;
-    private View mLoadingView;
+    private LoadingDialog mLoadingView;
     private View mEmptyView;
     private ViewGroup mNormalView;
     private TextView tvErrMsg;
@@ -35,11 +36,9 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
             throw new IllegalStateException("The parent layout of mNormalView must belong to the viewgroup");
         }
         ViewGroup parent = (ViewGroup) mNormalView.getParent();
-        View.inflate(activity, R.layout.view_loading, parent);
         View.inflate(activity, R.layout.view_error, parent);
         View.inflate(activity, R.layout.view_empty, parent);
 
-        mLoadingView = parent.findViewById(R.id.loading_group);
         mErrorView = parent.findViewById(R.id.error_group);
         mEmptyView = parent.findViewById(R.id.empty_group);
         tvErrMsg = parent.findViewById(R.id.tv_err_msg);
@@ -51,8 +50,9 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
         });
         mErrorView.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.GONE);
-        mLoadingView.setVisibility(View.VISIBLE);
-        mNormalView.setVisibility(View.GONE);
+        mNormalView.setVisibility(View.VISIBLE);
+
+        mLoadingView = new LoadingDialog(activity, R.style.LoadingDialog);
     }
 
     @Override
@@ -79,13 +79,12 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
 
     @Override
     public void showLoading() {
-        Log.d(TAG , "mLoadingView2 = " +mLoadingView);
         if(currentState == LOADING_STATE){
             return;
         }
         hideCurrentView();
         currentState = LOADING_STATE;
-        mLoadingView.setVisibility(View.VISIBLE);
+        mLoadingView.show();
     }
 
     @Override
@@ -101,7 +100,9 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
 
     @Override
     public void cancelLoading() {
-
+        if (mLoadingView != null && mLoadingView.isShowing()) {
+            mLoadingView.cancel();
+        }
     }
 
     @Override
@@ -117,14 +118,15 @@ public abstract class BaseResultActivity extends BaseActivity implements BaseVie
                 }
                 mNormalView.setVisibility(View.GONE);
                 break;
-            case LOADING_STATE:
-                mLoadingView.setVisibility(View.GONE);
-                break;
             case ERROR_STATE:
                 mErrorView.setVisibility(View.GONE);
                 break;
             case EMPTY_STATE:
                 mEmptyView.setVisibility(View.GONE);
+                break;
+            case LOADING_STATE:
+                cancelLoading();
+                break;
             default:
                 break;
         }
