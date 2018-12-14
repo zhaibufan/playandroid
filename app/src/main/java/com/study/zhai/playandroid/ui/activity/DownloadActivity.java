@@ -1,5 +1,6 @@
 package com.study.zhai.playandroid.ui.activity;
 
+import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.study.zhai.playandroid.contract.DownloadContract;
 import com.study.zhai.playandroid.presenter.DownloadFilePre;
 import com.study.zhai.playandroid.util.DecodeBitmapUtils;
 import com.study.zhai.playandroid.util.DpToPxUtils;
+import com.study.zhai.playandroid.widget.DownloadCircleProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +24,8 @@ public class DownloadActivity extends BaseResultActivity implements DownloadCont
 
     @BindView(R.id.iv_image)
     ImageView ivImage;
+    @BindView(R.id.pb_down)
+    DownloadCircleProgressBar progressBar;
 
     private static final String TAG = "DownloadActivity";
     private DownloadFilePre pre;
@@ -36,11 +40,11 @@ public class DownloadActivity extends BaseResultActivity implements DownloadCont
 
     @Override
     public void initView() {
-
     }
 
     public void downloadFile(View view) {
         pre.downloadFile(PICTURE_URL);
+//        startValueAnimation();
     }
 
     @Override
@@ -57,6 +61,7 @@ public class DownloadActivity extends BaseResultActivity implements DownloadCont
     @Override
     public void onProgress(int currentLength) {
         Log.d(TAG, "onProgress currentLength = " + currentLength);
+        progressBar.updateProgress(currentLength);
     }
 
     @Override
@@ -85,10 +90,17 @@ public class DownloadActivity extends BaseResultActivity implements DownloadCont
         pre.detachView();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    private void startValueAnimation() {
+        ValueAnimator animator = ValueAnimator.ofInt(0, 100);
+        animator.setDuration(5000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                Log.e(TAG, "value = " +value);
+                progressBar.updateProgress(value);
+            }
+        });
+        animator.start();
     }
 }
