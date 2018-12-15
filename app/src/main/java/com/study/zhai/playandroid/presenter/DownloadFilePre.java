@@ -1,18 +1,16 @@
 package com.study.zhai.playandroid.presenter;
 
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.api.ApiService;
 import com.study.zhai.playandroid.api.ApiStore;
-import com.study.zhai.playandroid.base.BasePre;
 import com.study.zhai.playandroid.base.BasePresenter;
 import com.study.zhai.playandroid.contract.DownloadContract;
+import com.study.zhai.playandroid.util.ConstantUtil;
+import com.study.zhai.playandroid.util.FileUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,48 +25,30 @@ import okhttp3.ResponseBody;
 public class DownloadFilePre extends BasePresenter<DownloadContract.View> implements DownloadContract.Presenter {
 
     private static final String TAG = "DownloadFilePre";
-    private static final String PATH_CHALLENGE_VIDEO = Environment.getExternalStorageDirectory() + "/DownloadFile";
     private String mFilePath; //下载到本地的视频路径
     private File mFile;
 
     @Override
     public void downloadFile(String url) {
-
         String name = url;
-        File dir = new File(PATH_CHALLENGE_VIDEO);
-        if (dir != null) {
-            if (!dir.exists() || !dir.isDirectory()) {
-                dir.mkdir();
-            }
+        if (FileUtils.createOrExistsDir(ConstantUtil.DOWN_LOAD)) {
             int i = name.lastIndexOf('/');//一定是找最后一个'/'出现的位置
             if (i != -1) {
                 name = name.substring(i);
-                mFilePath = PATH_CHALLENGE_VIDEO + name;
+                mFilePath = ConstantUtil.DOWN_LOAD + name;
             }
         }
-
         if (TextUtils.isEmpty(mFilePath)) {
             Log.e(TAG, "downloadVideo: 存储路径为空了");
             return;
         }
         mFile = new File(mFilePath);
-        if (mFile == null ) {
-            if (isAttachView()) {
-                mView.onFailure("文件路径不对");
-            }
-            return;
-        }
-        if (mFile.exists()) {
+        if (!FileUtils.isFileExists(mFile) && FileUtils.createOrExistsFile(mFile)) {
+            requestNet(url);
+        } else {
             if (isAttachView()) {
                 mView.onFinish(mFilePath);
             }
-        } else {
-            try {
-                mFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            requestNet(url);
         }
     }
 

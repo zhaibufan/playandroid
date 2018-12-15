@@ -1,24 +1,18 @@
 package com.study.zhai.playandroid.ui.activity;
 
 import android.animation.ValueAnimator;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseResultActivity;
 import com.study.zhai.playandroid.contract.DownloadContract;
 import com.study.zhai.playandroid.presenter.DownloadFilePre;
-import com.study.zhai.playandroid.util.DecodeBitmapUtils;
-import com.study.zhai.playandroid.util.DpToPxUtils;
 import com.study.zhai.playandroid.widget.DownloadCircleProgressBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class DownloadActivity extends BaseResultActivity implements DownloadContract.View {
 

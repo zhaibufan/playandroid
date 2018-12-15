@@ -1,15 +1,15 @@
 package com.study.zhai.playandroid;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
+
 import java.util.List;
 
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -35,6 +35,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void download(View v) {
         startActivity(new Intent(this, DownloadActivity.class));
+    }
+
+    public void settingPhoto(View v) {
+        startActivity(new Intent(this, SettingPhotoActivity.class));
     }
 
 

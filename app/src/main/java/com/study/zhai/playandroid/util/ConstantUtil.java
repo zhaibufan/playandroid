@@ -81,5 +81,10 @@ public class ConstantUtil {
      */
     public static final String SEARCH_RESULT_KEY = "search_result_key";
 
-    public static final String SD_CARD_PATH = Environment.getExternalStorageState();
+    /**所有文件存储的跟文件夹*/
+    public static final String SD_ROOT_PATH = Environment.getExternalStorageDirectory() + "/PlayAndroid";
+    /**用户头像的文件夹*/
+    public static final String USER_PHOTO = SD_ROOT_PATH + "/UserPhoto";
+    /**下载的文件夹*/
+    public static final String DOWN_LOAD = SD_ROOT_PATH + "/DownloadFile";
 }
