@@ -105,6 +105,7 @@ public class SettingPhotoActivity extends BaseActivity {
                     }
                     PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
                     break;
+                // 裁剪完成后的回调
                 case CODE_RESULT_REQUEST:
                     Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                     if (bitmap != null) {
