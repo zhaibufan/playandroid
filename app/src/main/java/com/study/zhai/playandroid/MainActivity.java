@@ -41,6 +41,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         startActivity(new Intent(this, SettingPhotoActivity.class));
     }
 
+    public void progressBar(View v) {
+
+    }
+
 
     private void requestPermission() {
         if (!EasyPermissions.hasPermissions(this, permission)) {

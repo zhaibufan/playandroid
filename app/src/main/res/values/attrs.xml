@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TouchProgressBar">
+        <attr name="progressBgColor" format="color"/>
+        <attr name="progressColor" format="color"/>
+        <attr name="pointColor" format="color"/>
+        <attr name="isGradient" format="boolean"/>
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color"/>
+        <attr name="pointRadius" format="integer"/>
+        <attr name="progress" format="integer"/>
+    </declare-styleable>
+</resources>
