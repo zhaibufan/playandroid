@@ -60,4 +60,8 @@
     <color name="popup_window">#80000000</color>
     <color name="theme_bgs">#EEF8FC</color>
     <color name="while_most_color">#e4e4e4</color>
+
+    <color name="color_4097EA">#4097EA</color>
+    <color name="color_F25447">#F25447</color>
+    <color name="color_CCCCCC">#CCCCCC</color>
 </resources>

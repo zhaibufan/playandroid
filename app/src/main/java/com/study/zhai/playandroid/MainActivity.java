@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     public void progressBar(View v) {
-
+        startActivity(new Intent(this, ProgressBarActivity.class));
     }
 
 
