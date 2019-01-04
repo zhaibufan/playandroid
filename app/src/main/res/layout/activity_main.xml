@@ -22,5 +22,10 @@
         android:layout_height="wrap_content"
         android:text="自定义进度条"
         android:onClick="progressBar"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="图片视频选择器"
+        android:onClick="picker"/>
 
 </LinearLayout>

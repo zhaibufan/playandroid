@@ -37,4 +37,8 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <!-- 沉浸式状态栏的主题 -->
+    <style name="StatusBarTranslucentTheme" parent="AppTheme">
+    </style>
+
 </resources>

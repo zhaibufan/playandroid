@@ -8,11 +8,14 @@ import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.CameraActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
+import com.study.zhai.playandroid.util.StatusBarUtils;
 
 import java.util.List;
 
+import me.jessyan.autosize.AutoSizeConfig;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -24,10 +27,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     @Override
     public int getLayoutId() {
+        AutoSizeConfig.getInstance().setBaseOnWidth(false);
         return R.layout.activity_main;
     }
     @Override
     public void initView() {
+        StatusBarUtils.setStatusViewColor(this, this.getResources().getColor(R.color.white_255));
+        StatusBarUtils.statusBarLightMode(this);
     }
     @Override
     public void initData() {
@@ -44,6 +50,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void progressBar(View v) {
         startActivity(new Intent(this, ProgressBarActivity.class));
+    }
+    public void picker(View v) {
+        startActivity(new Intent(this, CameraActivity.class));
     }
 
 

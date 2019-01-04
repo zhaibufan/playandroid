@@ -2,6 +2,8 @@ package com.study.zhai.playandroid;
 
 import android.app.Application;
 
+import me.jessyan.autosize.AutoSizeConfig;
+
 /**
  * application
  *
@@ -19,6 +21,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         myApplication = this;
+        // AndroidAutoSize默认是以宽度为基准就行适配的，改方法是设置以高度为基准
+        AutoSizeConfig.getInstance().setBaseOnWidth(false);
     }
 
     public static synchronized MyApplication getInstance() {
