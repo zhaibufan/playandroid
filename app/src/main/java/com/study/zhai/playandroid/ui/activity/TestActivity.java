@@ -2,15 +2,18 @@ package com.study.zhai.playandroid.ui.activity;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
+import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseResultActivity;
 import com.study.zhai.playandroid.contract.HomeListContract;
 import com.study.zhai.playandroid.presenter.ArticleListPre;
+import com.study.zhai.playandroid.util.ZToast;
 
 public class TestActivity extends BaseResultActivity implements HomeListContract.View {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "TestActivity";
     private Handler mHandler = new Handler();
     private ArticleListPre pre;
 
@@ -22,6 +25,10 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
     @Override
     public void initView() {
         super.initView();
+    }
+
+    public void test(View view) {
+        ZToast.showToast(MyApplication.getInstance(), "click");
     }
 
     @Override
@@ -40,8 +47,8 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
 
     @Override
     public void getDemoResultOK(String result) {
-        showNormal();
         Log.d(TAG, "result = " +result);
+        showNormal();
     }
 
     @Override
@@ -49,6 +56,11 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
         showError(info);
     }
 
+    @Override
+    public void reload() {
+        super.reload();
+        pre.getArticleList(5);
+    }
 
     @Override
     protected void onDestroy() {

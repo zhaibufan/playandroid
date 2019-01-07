@@ -10,6 +10,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="测试MVP"
+        android:onClick="mvpTest"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="retrofit下载图片"
         android:onClick="download"/>
     <Button
@@ -25,7 +31,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="图片视频选择器"
+        android:text="自定义相机"
         android:onClick="picker"/>
 
 </LinearLayout>

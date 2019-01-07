@@ -11,6 +11,7 @@ import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.CameraActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
+import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.util.StatusBarUtils;
 
 import java.util.List;
@@ -38,6 +39,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     public void initData() {
         requestPermission();
+    }
+
+    public void mvpTest(View view) {
+        startActivity(new Intent(this, TestActivity.class));
     }
 
     public void download(View v) {
