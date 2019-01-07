@@ -1,10 +1,10 @@
 package com.study.zhai.playandroid.util;
 
+import android.hardware.Camera.Size;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import android.hardware.Camera.Size;
 
 public class CameraUtils {
 
@@ -30,7 +30,7 @@ public class CameraUtils {
         if (null == result) {
             for (Size size : sizeList) {
                 float curRatio = ((float) size.width) / size.height;
-                if (curRatio == 12f / 9) {
+                if (curRatio == 4f / 3) {
                     result = size;
                 }
             }
