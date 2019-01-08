@@ -26,7 +26,7 @@ import okio.BufferedSource;
  * @QQ:745612618
  */
 
-public class HttpLoggingInterceptor implements Interceptor {
+public class HttpLogInterceptor implements Interceptor {
     private final Charset UTF8 = Charset.forName("UTF-8");
 
     @Override

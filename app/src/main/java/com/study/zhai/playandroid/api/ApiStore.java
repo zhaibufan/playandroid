@@ -67,7 +67,7 @@ public class ApiStore {
                         return chain.proceed(request);
                     }
                 })
-                .addInterceptor(new HttpLoggingInterceptor())
+                .addInterceptor(new HttpLogInterceptor())
                 .cookieJar(new CookiesManager());
 
         SSLSocketFactory sslSocketFactory = getSSLSocketFactory(new Buffer().writeUtf8(ConstantUtil.SSL_KEY).inputStream(),
