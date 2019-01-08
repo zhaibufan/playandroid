@@ -36,6 +36,12 @@ public class ResizeAbleSurfaceView extends SurfaceView {
         }
     }
 
+    /**
+     * 重新绘制相机预览的宽高 放置变形
+     *
+     * @param width 屏幕的宽
+     * @param height 屏幕的高
+     */
     public void resize(int width, int height) {
         mWidth = width;
         mHeight = height;

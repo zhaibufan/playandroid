@@ -40,5 +40,6 @@ public class ConstantUtil {
     public static final String USER_PHOTO = SD_ROOT_PATH + "/UserPhoto";
     /**下载的文件夹*/
     public static final String DOWN_LOAD = SD_ROOT_PATH + "/DownloadFile";
-    public static final String CUSTOM_CAMERA = SD_ROOT_PATH + "/camera";
+    /**自定义相机存储的文件夹*/
+    public static final String CUSTOM_CAMERA = SD_ROOT_PATH + "/Camera";
 }
