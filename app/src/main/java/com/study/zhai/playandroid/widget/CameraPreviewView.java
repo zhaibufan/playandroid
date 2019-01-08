@@ -1,81 +1,104 @@
-package com.study.zhai.playandroid.ui.activity;
+package com.study.zhai.playandroid.widget;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.util.DisplayMetrics;
+import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-import android.view.View;
+import android.view.SurfaceView;
 
-import com.study.zhai.playandroid.R;
-import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.util.CameraUtils;
-import com.study.zhai.playandroid.util.ConstantUtil;
 import com.study.zhai.playandroid.util.FileUtils;
 import com.study.zhai.playandroid.util.LogUtils;
-import com.study.zhai.playandroid.util.StatusBarUtils;
-import com.study.zhai.playandroid.widget.ResizeAbleSurfaceView;
+import com.study.zhai.playandroid.util.ZToast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
+public class CameraPreviewView extends SurfaceView implements SurfaceHolder.Callback {
 
-public class CameraActivity extends BaseActivity implements SurfaceHolder.Callback{
+    private static final String TAG = "CameraPreviewView";
+    private Context mContext;
+    private int mWidth = -1;
+    private int mHeight = -1;
 
-    @BindView(R.id.surface_view)
-    ResizeAbleSurfaceView mSurfaceView;
-
-    private static final String TAG = "CameraActivity";
     private Camera mCamera;
     private SurfaceHolder mHolder;
     private Camera.Parameters mParameters;
-    private String filepath;
-    private int cameraPosition = Camera.CameraInfo.CAMERA_FACING_BACK; //当前选用的摄像头，0后置 1前置 默认后置
+    private int mCurrentCameraId = Camera.CameraInfo.CAMERA_FACING_BACK; //当前选用的摄像头，0后置 1前置 默认后置
+    private String mDirPath, mPictureName; //存储照片的文件夹和图片名称
+    private CameraCallBack mCallBack;
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_camera;
+    public interface CameraCallBack {
+        void onSurfaceCreated();
+        void onSurfaceChanged();
+        void onSurfaceDestroyed();
+    }
+
+    public CameraPreviewView(Context context) {
+        this(context, null);
+    }
+
+    public CameraPreviewView(Context context, AttributeSet attrs) {
+        this(context, attrs, -1);
+    }
+
+    public CameraPreviewView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        mContext = context;
+        init();
+    }
+
+    public void setOnCameraCallBack(CameraCallBack callBack) {
+        this.mCallBack = callBack;
     }
 
     @Override
-    public void initView() {
-        StatusBarUtils.fullScreen(this);
-        mHolder = mSurfaceView.getHolder();
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (mWidth == -1 || mHeight == -1) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        } else {
+            setMeasuredDimension(mWidth, mHeight);
+        }
+    }
+
+    /**
+     * 重新绘制相机预览的宽高 防止预览变形
+     * 该方法在surfaceView初始化之后就调用
+     *
+     * @param width  surfaceView的宽  全屏就是屏幕的宽
+     * @param height surfaceView的高  全屏就是屏幕的高
+     */
+    public void resize(int width, int height) {
+        this.mWidth = width;
+        this.mHeight = height;
+        this.getHolder().setFixedSize(width, height);
+        requestLayout();
+        invalidate();
+    }
+
+    private void init() {
+        mHolder = this.getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-        // 该方法获取的屏幕宽高包括系统状态栏高度
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getRealMetrics(outMetrics);
-        int widthPixel = outMetrics.widthPixels;
-        int heightPixel = outMetrics.heightPixels;
-        // 重新绘制相机预览的宽高
-        mSurfaceView.resize(widthPixel, heightPixel);
-    }
-
-    @Override
-    public void initData() {
-    }
-
-    public void switchCamera(View view) {
-        switchFrontCamera();
     }
 
     /**
      * 拍照
-     * @param view
      */
-    public void takePicture(View view) {
+    public void takePicture(String dirPath, String pictureName) {
+        this.mDirPath = dirPath;
+        this.mPictureName = pictureName;
         mCamera.autoFocus(new Camera.AutoFocusCallback() {
             @Override
             public void onAutoFocus(boolean success, Camera camera) {
@@ -107,97 +130,68 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
     };
 
     /**
-     * 创建jpg图片
+     * 创建jpg图片保存到本地
      */
     Camera.PictureCallback jpeg = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            LogUtils.e(TAG, "jpeg");
-            try {
-                Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                Bitmap bitmap;
-                if (cameraPosition == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                    bitmap = rotateBitmapByDegree(bmp, 90);
+            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            Bitmap bitmap;
+            if (mCurrentCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                bitmap = rotateBitmapByDegree(bmp, 90);
+            } else {
+                bitmap = rotateBitmapByDegree(bmp, -90);
+            }
+            File file = createSavePictureFile();
+            if (file == null) {
+                ZToast.showToast(MyApplication.getInstance(), "创建文件夹失败");
+            } else {
+                if (!FileUtils.isFileExists(file) && FileUtils.createOrExistsFile(file)) {
+                    saveBitmapToLocal(camera, bitmap, file);
                 } else {
-                    bitmap = rotateBitmapByDegree(bmp, -90);
+                    ZToast.showToast(MyApplication.getInstance(), "创建图片文件失败");
                 }
-                //自定义文件保存路径  以拍摄时间区分命名
-                if (FileUtils.createOrExistsDir(ConstantUtil.CUSTOM_CAMERA)) {
-                    filepath = ConstantUtil.CUSTOM_CAMERA + File.separator + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +  ".jpg";
-                    File file = new File(filepath);
-                    if (!FileUtils.isFileExists(file) && FileUtils.createOrExistsFile(file)) {
-                        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);//将图片压缩的流里面
-                        bos.flush();// 刷新此缓冲区的输出流
-                        bos.close();// 关闭此输出流并释放与此流有关的所有系统资源
-                        camera.stopPreview();//关闭预览 处理数据
-                        camera.startPreview();//数据处理完后继续开始预览
-                        bitmap.recycle();//回收bitmap空间
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                LogUtils.e(TAG, "erro = " + e.getMessage());
             }
         }
     };
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        LogUtils.e(TAG, "surfaceCreated");
+        mCallBack.onSurfaceCreated();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        LogUtils.e(TAG, "surfaceChanged");
-        openCamera(cameraPosition);
+        mCallBack.onSurfaceChanged();
+        openCamera(mCurrentCameraId);
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        mCallBack.onSurfaceDestroyed();
+        stopCamera();
     }
 
     private void openCamera(int cameraId) {
         if (mCamera == null) {
             mCamera = Camera.open(cameraId);
+            setCameraDisplayOrientation((Activity) mContext, cameraId, mCamera); //设置预览的方向
+            setCameraParameters(); //配置相机参数
+            mCamera.startPreview(); //开启预览
             try {
-                setCameraDisplayOrientation(this, cameraId, mCamera);
-                setCameraParameters(); //配置相机参数
-                mCamera.startPreview(); //开始预览取景
                 mCamera.setPreviewDisplay(mHolder); //通过SurfaceView显示取景画面
             } catch (IOException e) {
                 e.printStackTrace();
+                LogUtils.e("camera exception --- " + e.getMessage());
             }
         }
-    }
-
-    /**
-     * 设置Camera参数  必须在startPreview之前
-     */
-    private void setCameraParameters() {
-        if (mCamera != null) {
-            mParameters = mCamera.getParameters();
-            // 设置预览的宽高
-//            setCameraPreviewSize();
-            // 设置照片质量
-            mParameters.setJpegQuality(100);
-            // 连续对焦模式
-            if (mParameters.getSupportedFocusModes().contains(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-                mParameters.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-            }
-            //自动对焦
-            mCamera.cancelAutoFocus();
-            mCamera.setParameters(mParameters);
-        }
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        LogUtils.e(TAG, "surfaceDestroyed");
-        stopCamera();
     }
 
     /**
      * 保证预览方向正确
      *
      * @param activity
-     * @param cameraId  前置/后置摄像头的参数
+     * @param cameraId 前置/后置摄像头的参数
      * @param camera
      */
     public static void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
@@ -231,6 +225,26 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
     }
 
     /**
+     * 设置Camera参数  必须在startPreview之前
+     */
+    private void setCameraParameters() {
+        if (mCamera != null) {
+            mParameters = mCamera.getParameters();
+            // 设置预览的宽高
+//            setCameraPreviewSize();
+            // 设置照片质量
+            mParameters.setJpegQuality(100);
+            // 连续对焦模式
+            if (mParameters.getSupportedFocusModes().contains(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                mParameters.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            }
+            //自动对焦
+            mCamera.cancelAutoFocus();
+            mCamera.setParameters(mParameters);
+        }
+    }
+
+    /**
      * 将图片按照某个角度进行旋转 保证拍照后的照片方向正确
      *
      * @param bm     需要旋转的图片
@@ -259,6 +273,39 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
     }
 
     /**
+     * 创建保存图片的本地文件
+     *
+     * @return
+     */
+    private File createSavePictureFile() {
+        if (!FileUtils.createOrExistsDir(mDirPath)) {
+            return null;
+        }
+        return new File(mDirPath, mPictureName);
+    }
+
+    /**
+     * 图片保存到本地
+     *
+     * @param camera
+     * @param bitmap
+     * @param file
+     */
+    private void saveBitmapToLocal(Camera camera, Bitmap bitmap, File file) {
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);//将图片压缩的流里面
+            bos.flush();// 刷新此缓冲区的输出流
+            bos.close();// 关闭此输出流并释放与此流有关的所有系统资源
+            camera.stopPreview();//关闭预览 处理数据
+            camera.startPreview();//数据处理完后继续开始预览
+            bitmap.recycle();//回收bitmap空间
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 当相机界面不可见时停止预览 释放资源
      */
     private void stopCamera() {
@@ -278,19 +325,19 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
 
         for (int i = 0; i < cameraCount; i++) {
             Camera.getCameraInfo(i, cameraInfo);//得到每一个摄像头的信息
-            if (cameraPosition == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            if (mCurrentCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 //现在是后置，变更为前置
                 if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {//代表摄像头的方位，CAMERA_FACING_FRONT前置      CAMERA_FACING_BACK后置
                     //重新打开
                     reStartCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
-                    cameraPosition = Camera.CameraInfo.CAMERA_FACING_FRONT;
+                    mCurrentCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
                     break;
                 }
             } else {
                 //现在是前置， 变更为后置
                 if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {//代表摄像头的方位，CAMERA_FACING_FRONT前置      CAMERA_FACING_BACK后置
                     reStartCamera(Camera.CameraInfo.CAMERA_FACING_BACK);
-                    cameraPosition = Camera.CameraInfo.CAMERA_FACING_BACK;
+                    mCurrentCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
                     break;
                 }
             }
@@ -307,35 +354,37 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
         openCamera(cameraId);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    /**
+     * 当页面销毁时销毁相机相关资源
+     */
+    public void destroyCamera() {
         stopCamera();
         mHolder = null;
-        mSurfaceView = null;
     }
 
     /**
      * 设置相机预览的宽高 防止预览的画面变形
+     *
+     *      跟resize的功能一样 但resize的效果更好
      */
-    private void setCameraPreviewSize(){
+    private void setCameraPreviewSize() {
         List<Camera.Size> pictureSizeList = mParameters.getSupportedPictureSizes();
         /* 从列表中选取合适的分辨率 */
-        Camera.Size picSize = CameraUtils.getProperSize4Ratio(pictureSizeList, (float) mSurfaceView.getHeight() / mSurfaceView.getWidth());
+        Camera.Size picSize = CameraUtils.getProperSize4Ratio(pictureSizeList, (float) this.getHeight() / this.getWidth());
         mParameters.setPictureSize(picSize.width, picSize.height);
-        Log.e(TAG,"最终设置的picsize: picSize.width: " + picSize.width + " picSize.height: " + picSize.height);
+        Log.e(TAG, "最终设置的picsize: picSize.width: " + picSize.width + " picSize.height: " + picSize.height);
 
         List<Camera.Size> videoSiezes = mParameters.getSupportedVideoSizes();
         int videoWidth = 0;
         int videoHeight = 0;
         if (videoSiezes != null && !videoSiezes.isEmpty()) {
-            Camera.Size videoSize = CameraUtils.getMaxSize4Width(videoSiezes,mSurfaceView.getWidth());
-            Log.e(TAG, "获取到的：video_width===" + videoSize.width + " video_height=== " +  videoSize.height);
+            Camera.Size videoSize = CameraUtils.getMaxSize4Width(videoSiezes, this.getWidth());
+            Log.e(TAG, "获取到的：video_width===" + videoSize.width + " video_height=== " + videoSize.height);
             videoWidth = videoSize.width;
             videoHeight = videoSize.height;
         }
         List<Camera.Size> previewSizes = mParameters.getSupportedPreviewSizes();
-        Camera.Size previewSize = CameraUtils.getProperSize4Ratio(previewSizes,(float) videoWidth / videoHeight);
+        Camera.Size previewSize = CameraUtils.getProperSize4Ratio(previewSizes, (float) videoWidth / videoHeight);
         if (previewSize != null) {
             mParameters.setPreviewSize(previewSize.width, previewSize.height);
             Log.e(TAG, "最终设置的预览尺寸,previewSize.width: " + previewSize.width + " previewSize.height: " + previewSize.height);

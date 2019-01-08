@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
-import com.study.zhai.playandroid.ui.activity.CameraActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
@@ -52,14 +52,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     public void settingPhoto(View v) {
         startActivity(new Intent(this, SettingPhotoActivity.class));
     }
+    public void camera(View v) {
+        startActivity(new Intent(this, CustomCameraActivity.class));
+    }
 
     public void progressBar(View v) {
         startActivity(new Intent(this, ProgressBarActivity.class));
     }
-    public void picker(View v) {
-        startActivity(new Intent(this, CameraActivity.class));
-    }
-
 
     private void requestPermission() {
         if (!EasyPermissions.hasPermissions(this, permission)) {
