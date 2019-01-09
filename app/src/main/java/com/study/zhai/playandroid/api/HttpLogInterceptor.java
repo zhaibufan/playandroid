@@ -1,6 +1,6 @@
 package com.study.zhai.playandroid.api;
 
-import com.study.zhai.playandroid.util.AppLogMessageUtil;
+import com.study.zhai.playandroid.log.LogUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -19,13 +19,7 @@ import okio.BufferedSource;
 /**
  * okhttp 拦截器
  *
- * @packageName: cn.white.ymc.wanandroidmaster.model.api
- * @fileName: Http
- * @date: 2018/7/23  17:47
- * @author: ymc
- * @QQ:745612618
  */
-
 public class HttpLogInterceptor implements Interceptor {
     private final Charset UTF8 = Charset.forName("UTF-8");
 
@@ -45,7 +39,7 @@ public class HttpLogInterceptor implements Interceptor {
             body = buffer.readString(charset);
         }
 
-        AppLogMessageUtil.logE("jxy",
+        LogUtils.e("jxy",
                 "发送请求: method：" + request.method()
                         + "\nurl：" + request.url()
                         + "\n请求头：" + request.headers()
@@ -76,10 +70,10 @@ public class HttpLogInterceptor implements Interceptor {
         rBody = buffer.clone().readString(charset);
 //        }
 
-        AppLogMessageUtil.logE("jxy",
+        LogUtils.e("jxy",
                 "收到响应: code:" + response.code()
-                + "\n请求url："+response.request().url()
-                + "\n请求body：" + body
+                        + "\n请求url：" + response.request().url()
+                        + "\n请求body：" + body
                         + "\nResponse: " + rBody);
 
         return response;

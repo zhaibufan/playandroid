@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -14,9 +13,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.study.zhai.playandroid.MyApplication;
+import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.util.CameraUtils;
 import com.study.zhai.playandroid.util.FileUtils;
-import com.study.zhai.playandroid.util.LogUtils;
 import com.study.zhai.playandroid.util.ZToast;
 
 import java.io.BufferedOutputStream;

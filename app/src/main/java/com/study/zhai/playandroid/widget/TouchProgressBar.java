@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.study.zhai.playandroid.R;
-import com.study.zhai.playandroid.util.LogUtils;
 
 public class TouchProgressBar extends View {
 

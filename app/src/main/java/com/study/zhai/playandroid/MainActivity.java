@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
@@ -63,6 +64,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     private void requestPermission() {
         if (!EasyPermissions.hasPermissions(this, permission)) {
             EasyPermissions.requestPermissions(this, "您有重要权限未开启，可能影响使用，建议开启", APPLY_PERMISSION_CODE, permission);
+        } else {
+            LogUtils.e(TAG, "以获取了权限");
         }
     }
 

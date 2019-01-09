@@ -2,6 +2,8 @@ package com.study.zhai.playandroid.util;
 
 import android.hardware.Camera.Size;
 
+import com.study.zhai.playandroid.log.LogUtils;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

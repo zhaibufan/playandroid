@@ -1,10 +1,11 @@
 package com.study.zhai.playandroid.api;
 
-import android.support.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.study.zhai.playandroid.BuildConfig;
 import com.study.zhai.playandroid.api.cookie.CookiesManager;
+import com.study.zhai.playandroid.log.httplog.HttpLoggingInterceptorM;
+import com.study.zhai.playandroid.log.httplog.LogInterceptor;
 import com.study.zhai.playandroid.util.ConstantUtil;
 
 import java.io.IOException;
@@ -17,10 +18,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -57,18 +55,15 @@ public class ApiStore {
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create();
 
+        // 创建拦截器实列，用来输出请求与响应的日志
+        HttpLoggingInterceptorM interceptor = new HttpLoggingInterceptorM(new LogInterceptor());
+        interceptor.setLevel(HttpLoggingInterceptorM.Level.BODY);
+
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(@NonNull Chain chain) throws IOException {
-                        Request original = chain.request();
-                        Request.Builder requestBuilder = original.newBuilder();
-                        Request request = requestBuilder.build();
-                        return chain.proceed(request);
-                    }
-                })
-                .addInterceptor(new HttpLogInterceptor())
                 .cookieJar(new CookiesManager());
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(interceptor);
+        }
 
         SSLSocketFactory sslSocketFactory = getSSLSocketFactory(new Buffer().writeUtf8(ConstantUtil.SSL_KEY).inputStream(),
                 new Buffer().writeUtf8(ConstantUtil.MIDDLE_KEY).inputStream());
