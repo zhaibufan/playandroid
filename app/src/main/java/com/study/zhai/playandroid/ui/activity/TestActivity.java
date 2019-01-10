@@ -9,7 +9,7 @@ import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseResultActivity;
 import com.study.zhai.playandroid.contract.HomeListContract;
 import com.study.zhai.playandroid.presenter.ArticleListPre;
-import com.study.zhai.playandroid.util.ZToast;
+import com.study.zhai.playandroid.utils.ZToast;
 
 public class TestActivity extends BaseResultActivity implements HomeListContract.View {
 

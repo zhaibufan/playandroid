@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
-import com.study.zhai.playandroid.util.ConstantUtil;
-import com.study.zhai.playandroid.util.FileUtils;
-import com.study.zhai.playandroid.util.PhotoUtils;
-import com.study.zhai.playandroid.util.ToastUtil;
+import com.study.zhai.playandroid.utils.ConstantUtil;
+import com.study.zhai.playandroid.utils.FileUtils;
+import com.study.zhai.playandroid.utils.PhotoUtils;
+import com.study.zhai.playandroid.utils.ToastUtil;
 
 import java.io.File;
 

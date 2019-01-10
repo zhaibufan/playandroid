@@ -6,8 +6,8 @@ import android.view.View;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
-import com.study.zhai.playandroid.util.ConstantUtil;
-import com.study.zhai.playandroid.util.StatusBarUtils;
+import com.study.zhai.playandroid.utils.ConstantUtil;
+import com.study.zhai.playandroid.utils.StatusBarUtils;
 import com.study.zhai.playandroid.widget.CameraPreviewView;
 
 import java.text.SimpleDateFormat;

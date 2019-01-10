@@ -13,7 +13,8 @@ import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
-import com.study.zhai.playandroid.util.StatusBarUtils;
+import com.study.zhai.playandroid.utils.NetUtils;
+import com.study.zhai.playandroid.utils.StatusBarUtils;
 
 import java.util.List;
 
@@ -105,5 +106,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
                 .setNegativeButton("否")
                 .build()
                 .show();
+    }
+
+    @Override
+    public void onNetChange(int netStatus) {
+        super.onNetChange(netStatus);
+        if (netStatus == NetUtils.NETWORK_WIFI) {
+            LogUtils.d("当前网络 wifi");
+        }
     }
 }

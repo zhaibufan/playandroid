@@ -14,9 +14,9 @@ import android.view.SurfaceView;
 
 import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.log.LogUtils;
-import com.study.zhai.playandroid.util.CameraUtils;
-import com.study.zhai.playandroid.util.FileUtils;
-import com.study.zhai.playandroid.util.ZToast;
+import com.study.zhai.playandroid.utils.CameraUtils;
+import com.study.zhai.playandroid.utils.FileUtils;
+import com.study.zhai.playandroid.utils.ZToast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.study.zhai.playandroid.util;
+package com.study.zhai.playandroid.utils;
 
 import android.hardware.Camera.Size;
 

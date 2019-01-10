@@ -3,11 +3,13 @@ package com.study.zhai.playandroid.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.study.zhai.playandroid.BuildConfig;
+import com.study.zhai.playandroid.MyApplication;
 import com.study.zhai.playandroid.api.cookie.CookiesManager;
 import com.study.zhai.playandroid.log.httplog.HttpLoggingInterceptorM;
 import com.study.zhai.playandroid.log.httplog.LogInterceptor;
-import com.study.zhai.playandroid.util.ConstantUtil;
+import com.study.zhai.playandroid.utils.ConstantUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -18,6 +20,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okio.Buffer;
 import retrofit2.Retrofit;
@@ -55,12 +58,20 @@ public class ApiStore {
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create();
 
+        //设置缓存路径
+        File httpCacheDirectory = new File(MyApplication.getInstance().getCacheDir(), "responses");
+        //设置缓存 10M
+        Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
+
         // 创建拦截器实列，用来输出请求与响应的日志
         HttpLoggingInterceptorM interceptor = new HttpLoggingInterceptorM(new LogInterceptor());
         interceptor.setLevel(HttpLoggingInterceptorM.Level.BODY);
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
-                .cookieJar(new CookiesManager());
+                .cookieJar(new CookiesManager())
+                .addInterceptor(new OfflineCacheInterceptor()) //应用拦截器，优先于网络拦截器执行
+                .addNetworkInterceptor(new NetCacheInterceptor()) //网络拦截器，只有有网时才会调用执行该拦截器
+                .cache(cache);
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(interceptor);
         }

@@ -1,4 +1,4 @@
-package com.study.zhai.playandroid.util;
+package com.study.zhai.playandroid.utils;
 
 /**
  * Created by Administrator on 2017/4/17.

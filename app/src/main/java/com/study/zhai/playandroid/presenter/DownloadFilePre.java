@@ -7,8 +7,8 @@ import com.study.zhai.playandroid.api.ApiService;
 import com.study.zhai.playandroid.api.ApiStore;
 import com.study.zhai.playandroid.base.BasePresenter;
 import com.study.zhai.playandroid.contract.DownloadContract;
-import com.study.zhai.playandroid.util.ConstantUtil;
-import com.study.zhai.playandroid.util.FileUtils;
+import com.study.zhai.playandroid.utils.ConstantUtil;
+import com.study.zhai.playandroid.utils.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

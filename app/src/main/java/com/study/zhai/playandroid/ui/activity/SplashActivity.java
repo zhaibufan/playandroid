@@ -49,4 +49,8 @@ public class SplashActivity extends BaseActivity {
                     }
                 });
     }
+
+    @Override
+    public void onNetChange(int netStatus) {
+    }
 }
