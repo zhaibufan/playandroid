@@ -1,6 +1,5 @@
 package com.study.zhai.playandroid.ui.activity;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -14,7 +13,6 @@ import com.study.zhai.playandroid.utils.ZToast;
 public class TestActivity extends BaseResultActivity implements HomeListContract.View {
 
     private static final String TAG = "TestActivity";
-    private Handler mHandler = new Handler();
     private ArticleListPre pre;
 
     @Override
@@ -37,12 +35,7 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
         showLoading();
         pre = new ArticleListPre();
         pre.attachView(this);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pre.getArticleList(4);
-            }
-        }, 2000);
+        pre.getArticleList(4);
     }
 
     @Override
