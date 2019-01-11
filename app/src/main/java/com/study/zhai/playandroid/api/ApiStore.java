@@ -69,6 +69,7 @@ public class ApiStore {
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .cookieJar(new CookiesManager())
+                .addInterceptor(new CommonParamsInterceptor())
                 .addInterceptor(new OfflineCacheInterceptor()) //应用拦截器，优先于网络拦截器执行
                 .addNetworkInterceptor(new NetCacheInterceptor()) //网络拦截器，只有有网时才会调用执行该拦截器
                 .cache(cache);
