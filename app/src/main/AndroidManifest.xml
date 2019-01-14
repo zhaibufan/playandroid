@@ -43,6 +43,7 @@
             android:theme="@style/StatusBarTranslucentTheme"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ui.activity.PagerTestActivity"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>

@@ -32,5 +32,10 @@
         android:layout_height="wrap_content"
         android:text="自定义相机"
         android:onClick="camera"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="层叠ViewPager"
+        android:onClick="viewPager"/>
 
 </LinearLayout>

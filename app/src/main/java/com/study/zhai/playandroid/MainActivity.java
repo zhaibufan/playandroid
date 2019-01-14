@@ -10,6 +10,7 @@ import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
@@ -22,7 +23,7 @@ import me.jessyan.autosize.AutoSizeConfig;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private String[] permission = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -33,11 +34,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         AutoSizeConfig.getInstance().setBaseOnWidth(false);
         return R.layout.activity_main;
     }
+
     @Override
     public void initView() {
         StatusBarUtils.setStatusViewColor(this, this.getResources().getColor(R.color.white_255));
         StatusBarUtils.statusBarLightMode(this);
     }
+
     @Override
     public void initData() {
         requestPermission();
@@ -54,12 +57,17 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     public void settingPhoto(View v) {
         startActivity(new Intent(this, SettingPhotoActivity.class));
     }
+
     public void camera(View v) {
         startActivity(new Intent(this, CustomCameraActivity.class));
     }
 
     public void progressBar(View v) {
         startActivity(new Intent(this, ProgressBarActivity.class));
+    }
+
+    public void viewPager(View view) {
+        startActivity(new Intent(this, PagerTestActivity.class));
     }
 
     private void requestPermission() {
@@ -101,7 +109,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     private void showAppSettingsDialog(String rationale) {
         new AppSettingsDialog
                 .Builder(this)
-                .setRationale("此功能需要"+rationale+"权限，否则无法正常使用，建议打开设置")
+                .setRationale("此功能需要" + rationale + "权限，否则无法正常使用，建议打开设置")
                 .setPositiveButton("是")
                 .setNegativeButton("否")
                 .build()
