@@ -29,8 +29,6 @@ public class PagerTestActivity extends BaseActivity {
     ViewPager vpMorePager;
     @BindView(R.id.vp_scale_pager)
     ViewPager vpScalePager;
-    @BindView(R.id.vp_last_pager)
-    ViewPager vpLastPager;
 
     private List<Integer> colorsRes = Arrays.asList(R.color.colorPrimary, R.color.colorPrimaryDark,
             R.color.colorPrimary, R.color.colorAccent, R.color.green, R.color.drawbrilliant,
@@ -103,23 +101,6 @@ public class PagerTestActivity extends BaseActivity {
         }
     };
 
-    private ViewPagerCommonAdapter mLastAdapter = new ViewPagerCommonAdapter(colorsRes) {
-        @Override
-        protected void renderItemView(View view, int position) {
-            LinearLayout llRoot = view.findViewById(R.id.ll_root);
-            TextView tvText = view.findViewById(R.id.tv_text);
-            Integer itemData = (Integer) getBindItemData(position);
-            llRoot.setBackgroundResource(itemData);
-            tvText.setText(String.valueOf(position));
-        }
-
-        @Override
-        public View createPageItemView(ViewGroup container, int position) {
-            View view = LayoutInflater.from(PagerTestActivity.this).inflate(R.layout.view_pager, container, false);
-            return view;
-        }
-    };
-
 
     @Override
     public int getLayoutId() {
@@ -147,9 +128,6 @@ public class PagerTestActivity extends BaseActivity {
         vpScalePager.setPageTransformer(false, new ScaleTransformer());
         vpScalePager.setAdapter(mScalePagerAdapter);
         vpScalePager.setCurrentItem(3);
-
-        vpMorePager.setPageMargin(80);
-        vpLastPager.setAdapter(mLastAdapter);
     }
 
     @Override

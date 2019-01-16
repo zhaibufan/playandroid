@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- clipChildren属性是为实现第三中效果-->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?><!-- clipChildren属性是为实现第三中效果-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_horizontal_stack"
@@ -12,7 +11,7 @@
         android:layout_height="120dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="20dp"
-        android:clipChildren="false"/>
+        android:clipChildren="false" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_vertical_stack"
@@ -25,25 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:clipChildren="false"
-        android:layout_marginTop="10dp"/>
+        android:clipChildren="false" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_scale_pager"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:clipChildren="false"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_last_pager"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:clipToPadding="false"/>
+        android:layout_marginRight="70dp"
+        android:clipChildren="false" />
 </LinearLayout>
