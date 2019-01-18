@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         StatusBarUtils.statusBarLightMode(this);
     }
 
+
     @Override
     public void initData() {
         requestPermission();
