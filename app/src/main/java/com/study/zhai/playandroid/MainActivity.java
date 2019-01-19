@@ -12,6 +12,7 @@ import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
+import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.utils.NetUtils;
@@ -69,6 +70,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void viewPager(View view) {
         startActivity(new Intent(this, PagerTestActivity.class));
+    }
+
+    public void animal(View view) {
+        startActivity(new Intent(this, PropertyAnimationEntryActivity.class));
     }
 
     private void requestPermission() {

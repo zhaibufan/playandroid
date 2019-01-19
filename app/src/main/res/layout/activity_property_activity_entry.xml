@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_count_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="圆形倒计时控件"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/black_30"/>
+
+    <TextView
+        android:id="@+id/tv_balls_fall_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="两个小球同时落地"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/black_30"/>
+
+    <TextView
+        android:id="@+id/tv_property_animator_basics_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="属性动画基础（一）"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/black_30"/>
+
+</LinearLayout>

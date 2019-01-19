@@ -1,6 +1,8 @@
 package com.study.zhai.playandroid.utils;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.webkit.MimeTypeMap;
 
 public class ApplicationUtils {
@@ -23,5 +25,15 @@ public class ApplicationUtils {
             return mimeType;
         }
         return "file/*";
+    }
+
+    public static float getScreenHeight() {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        return dm.heightPixels;
+    }
+
+    public static float getScreenWidth() {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        return dm.widthPixels;
     }
 }
