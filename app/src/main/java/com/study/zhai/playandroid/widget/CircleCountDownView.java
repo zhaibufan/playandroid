@@ -11,11 +11,11 @@ import android.graphics.BitmapShader;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -223,25 +223,34 @@ public class CircleCountDownView extends View {
         circleImgRadius = (Math.min(width, height) - 2 * borderWidth - 2 * padding) / 2;
         float actualCircleImgBitmapWH = circleImgBitmap.getWidth();
         float circleDrawingScale = circleImgRadius * 2 / actualCircleImgBitmapWH;
+
+        // 沿图片的中心进行缩放
         Matrix matrix = new Matrix();
         matrix.setScale(circleDrawingScale, circleDrawingScale, actualCircleImgBitmapWH / 2, actualCircleImgBitmapWH / 2);
+
+        // 创建缩放后的图片和BitmapShader
         circleImgBitmap = Bitmap.createBitmap(circleImgBitmap, 0, 0, circleImgBitmap.getWidth(), circleImgBitmap.getHeight(), matrix, true);
         circleImgBitmapShader = new BitmapShader(circleImgBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+        // 将图片平移到中心
         circleImgTranslationX = (width - circleImgRadius * 2) / 2;
         circleImgTranslationY = (height - circleImgRadius * 2) / 2;
         circleImgMatrix.setTranslate(circleImgTranslationX, circleImgTranslationY);
 
         if (borderWidth > 0) {
-            // 外层进度条宽度（注意：需要减掉画笔宽度）
+            // 外层进度条所对应的矩形大小
             float circleProgressWH = Math.min(width, height) - borderWidth - 2 * padding;
             float left = (width > height ? (width - height) / 2 : 0) + borderWidth / 2 + padding;
             float top = (height > width ? (height - width) / 2 : 0) + borderWidth / 2 + padding;
             float right = left + circleProgressWH;
             float bottom = top + circleProgressWH;
             circleProgressRectF = new RectF(left, top, right, bottom);
+
             if (showProgress) {
-                circleProcessPaint.setShader(new LinearGradient(left, top, left + circleImgRadius * 2, top + circleImgRadius * 2, processColorStart, processColorEnd, Shader.TileMode.MIRROR));
-                circleProcessPaint.setMaskFilter(new BlurMaskFilter(processBlurMaskRadius, BlurMaskFilter.Blur.SOLID)); // 设置进度条阴影效果
+                // 设置进度条的渐变效果
+                circleProcessPaint.setShader(new SweepGradient(width/2, height/2, processColorStart, processColorEnd));
+                // 设置进度条阴影效果
+                circleProcessPaint.setMaskFilter(new BlurMaskFilter(processBlurMaskRadius, BlurMaskFilter.Blur.SOLID));
             }
         }
     }
@@ -256,21 +265,24 @@ public class CircleCountDownView extends View {
         int centerX = width / 2;
         int centerY = height / 2;
         if (borderWidth > 0) {
+            // 绘制底部圆环
             canvas.drawCircle(centerX, centerY, Math.min(width, height) / 2 - borderWidth / 2 - padding, circleBorderPaint);
             if (showProgress) {
+                // 绘制圆弧
                 canvas.drawArc(circleProgressRectF, 0, 360 * totalTimeProgress, false, circleProcessPaint);
             }
-
         }
+        // 旋转该view的背景图片
         circleImgMatrix.postRotate((currentAnimationInterpolation - lastAnimationInterpolation) * 360, centerX, centerY);
         circleImgBitmapShader.setLocalMatrix(circleImgMatrix);
         circleImgPaint.setShader(circleImgBitmapShader);
+        // 绘制圆环内部的背景
         canvas.drawCircle(centerX, centerY, circleImgRadius, circleImgPaint);
         lastAnimationInterpolation = currentAnimationInterpolation;
 
 
         // 绘制倒计时时间
-        // current
+        // 当前时间
         String currentTimePoint = currentCountDownValue + "s";
         float textWidth = valueTextPaint.measureText(currentTimePoint);
         float x = centerX - textWidth / 2;
@@ -280,7 +292,7 @@ public class CircleCountDownView extends View {
         valueTextPaint.setAlpha((int) (255 - currentAnimationInterpolation * 255));
         canvas.drawText(currentTimePoint, x, y, valueTextPaint);
 
-        // next
+        // 下一个时间
         String nextTimePoint = (currentCountDownValue - 1) + "s";
         textWidth = valueTextPaint.measureText(nextTimePoint);
         x = centerX - textWidth / 2;
