@@ -23,8 +23,6 @@ public class MyApplication extends Application {
         AutoSizeConfig.getInstance().setBaseOnWidth(false);
     }
 
-
-
     public static synchronized MyApplication getInstance() {
         return myApplication;
     }
