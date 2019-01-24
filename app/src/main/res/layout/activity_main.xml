@@ -42,5 +42,15 @@
         android:layout_height="wrap_content"
         android:text="属性动画"
         android:onClick="animal"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="音频动画"
+        android:onClick="recordAnimal"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="media选择器"
+        android:onClick="mediaSelect"/>
 
 </LinearLayout>

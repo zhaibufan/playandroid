@@ -47,6 +47,8 @@
         <activity android:name=".ui.activity.PropertyAnimationEntryActivity"/>
         <activity android:name=".ui.activity.CountDownActivity"/>
         <activity android:name=".ui.activity.BallsFallDownActivity"/>
+        <activity android:name=".ui.activity.RecordingAnimalActivity"/>
+        <activity android:name=".ui.activity.MediaSelectorTestActivity" />
 
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.study.zhai.playandroid.widget.WaveView
+        android:id="@+id/wave_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+    <com.study.zhai.playandroid.widget.AudioView
+        android:id="@+id/audio_view"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/wave_view"
+        android:layout_marginTop="10dp"
+        android:background="@color/red"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.study.zhai.playandroid.widget.AudioSignalView
+        android:id="@+id/audio_signal_view_1"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@+id/audio_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:asv_groupCount="4"
+        app:asv_groupInterval="2dp"
+        app:asv_lineCountInGroup="6"
+        app:asv_lineInterval="2dp"
+        app:asv_lineWidth="1.5dp"
+        app:asv_maxDynamicLineHeight="30dp"
+        app:asv_maxStaticLineHeight="20dp"
+        app:asv_minStaticLineHeight="20dp"
+        android:layout_marginTop="15dp"/>
+
+    <com.study.zhai.playandroid.widget.AudioSignalView
+        android:id="@+id/audio_signal_view_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/audio_signal_view_1"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        app:asv_groupCount="4"
+        app:asv_groupInterval="5dp"
+        app:asv_lineCountInGroup="6"
+        app:asv_lineInterval="2dp"
+        app:asv_lineWidth="1.5dp"
+        app:asv_maxDynamicLineHeight="30dp"
+        app:asv_maxStaticLineHeight="20dp"
+        app:asv_minStaticLineHeight="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/audio_signal_view_1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <com.study.zhai.playandroid.widget.AudioSignalView
+        android:id="@+id/audio_signal_view_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/audio_signal_view_1"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:asv_groupCount="4"
+        app:asv_groupInterval="5dp"
+        app:asv_lineCountInGroup="6"
+        app:asv_lineInterval="2dp"
+        app:asv_lineWidth="1.5dp"
+        app:asv_maxDynamicLineHeight="30dp"
+        app:asv_maxStaticLineHeight="20dp"
+        app:asv_minStaticLineHeight="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/audio_signal_view_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="开始录音"/>
+
+</android.support.constraint.ConstraintLayout>

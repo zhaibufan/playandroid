@@ -10,9 +10,11 @@ import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
+import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.utils.NetUtils;
@@ -41,7 +43,6 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         StatusBarUtils.setStatusViewColor(this, this.getResources().getColor(R.color.white_255));
         StatusBarUtils.statusBarLightMode(this);
     }
-
 
     @Override
     public void initData() {
@@ -74,6 +75,14 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void animal(View view) {
         startActivity(new Intent(this, PropertyAnimationEntryActivity.class));
+    }
+
+    public void recordAnimal(View view) {
+        startActivity(new Intent(this, RecordingAnimalActivity.class));
+    }
+
+    public void mediaSelect(View view) {
+        startActivity(new Intent(this, MediaSelectorTestActivity.class));
     }
 
     private void requestPermission() {

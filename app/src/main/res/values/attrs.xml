@@ -24,4 +24,16 @@
         <attr name="processColorEnd" format="color" />
         <attr name="processBlurMaskRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="AudioSignalView">
+        <attr name="asv_groupCount" format="integer" />
+        <attr name="asv_groupInterval" format="dimension" />
+        <attr name="asv_lineColor" format="color" />
+        <attr name="asv_lineWidth" format="dimension" />
+        <attr name="asv_lineInterval" format="dimension" />
+        <attr name="asv_maxDynamicLineHeight" format="dimension" />
+        <attr name="asv_maxStaticLineHeight" format="dimension" />
+        <attr name="asv_minStaticLineHeight" format="dimension"/>
+        <attr name="asv_lineCountInGroup" format="integer"/>
+    </declare-styleable>
 </resources>
