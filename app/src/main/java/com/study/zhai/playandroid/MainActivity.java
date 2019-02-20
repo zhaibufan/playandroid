@@ -14,6 +14,7 @@ import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
+import com.study.zhai.playandroid.ui.activity.RecordVideoActivity;
 import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
@@ -29,7 +30,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
-    private String[] permission = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private String[] permission = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
     private static final int APPLY_PERMISSION_CODE = 200;
 
     @Override
@@ -85,6 +87,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         startActivity(new Intent(this, MediaSelectorTestActivity.class));
     }
 
+    public void videoRecord(View view) {
+        startActivity(new Intent(this, RecordVideoActivity.class));
+    }
+
     private void requestPermission() {
         if (!EasyPermissions.hasPermissions(this, permission)) {
             EasyPermissions.requestPermissions(this, "您有重要权限未开启，可能影响使用，建议开启", APPLY_PERMISSION_CODE, permission);
@@ -117,6 +123,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
         if (EasyPermissions.somePermissionDenied(this, permission[2])) {
             showAppSettingsDialog("存储");
+        }
+        if (EasyPermissions.somePermissionDenied(this, permission[3])) {
+            showAppSettingsDialog("录制视频");
         }
     }
 
