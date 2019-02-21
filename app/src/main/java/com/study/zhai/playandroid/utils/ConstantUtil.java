@@ -44,4 +44,13 @@ public class ConstantUtil {
     public static final String CUSTOM_CAMERA = SD_ROOT_PATH + "/Camera";
     /**录制视频的文件夹*/
     public static final String RECORD_VIDEO = SD_ROOT_PATH + "/Video";
+
+    /**发送udp单播的ip*/
+    public static final String IP_SINGLE_UDP = "239.0.0.87";
+    /**发送udp组播的ip*/
+    public static final String IP_GROUP_UDP = "239.0.0.87";
+    /**发送udp广播的ip*/
+    public static final String IP_BROCAST_UDP="255.255.255.255";
+    /**发送udp的端口号*/
+    public static final int SEND_UDP_PORT = 18001;
 }

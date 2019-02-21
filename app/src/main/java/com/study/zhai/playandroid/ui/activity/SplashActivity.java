@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.study.zhai.playandroid.MainActivity;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.utils.udp.UdpReceiverService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +24,8 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        Intent intent = new Intent(this, UdpReceiverService.class);
+        startService(intent);
     }
 
     @Override

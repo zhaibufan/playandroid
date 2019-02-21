@@ -42,11 +42,11 @@ public abstract class BaseActivity extends AppCompatActivity implements NetBroad
 
     private void registerNetChangeReceiver() {
         if (mNetChangeReceiver == null) {
+            mNetChangeReceiver = new NetBroadcastReceiver(this);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //实例化IntentFilter对象
                 IntentFilter filter = new IntentFilter();
                 filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-                mNetChangeReceiver = new NetBroadcastReceiver(this);
                 //注册广播接收
                 registerReceiver(mNetChangeReceiver, filter);
             }

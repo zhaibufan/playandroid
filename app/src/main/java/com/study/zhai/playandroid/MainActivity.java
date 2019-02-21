@@ -10,6 +10,7 @@ import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.IOTestActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
@@ -18,6 +19,7 @@ import com.study.zhai.playandroid.ui.activity.RecordVideoActivity;
 import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
+import com.study.zhai.playandroid.ui.activity.UDPTestActivity;
 import com.study.zhai.playandroid.utils.NetUtils;
 import com.study.zhai.playandroid.utils.StatusBarUtils;
 
@@ -89,6 +91,14 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void videoRecord(View view) {
         startActivity(new Intent(this, RecordVideoActivity.class));
+    }
+
+    public void udpTest(View view) {
+        startActivity(new Intent(this, UDPTestActivity.class));
+    }
+
+    public void ioTest(View view) {
+        startActivity(new Intent(this, IOTestActivity.class));
     }
 
     private void requestPermission() {

@@ -27,7 +27,7 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    public interface NetChangeListener {
+    public interface  NetChangeListener {
         void onNetChange(int netStatus);
     }
 }

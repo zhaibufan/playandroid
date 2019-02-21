@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:name=".MyApplication"
@@ -51,6 +54,8 @@
         <activity android:name=".ui.activity.RecordingAnimalActivity"/>
         <activity android:name=".ui.activity.MediaSelectorTestActivity" />
         <activity android:name=".ui.activity.RecordVideoActivity"/>
+        <activity android:name=".ui.activity.UDPTestActivity"/>
+        <activity android:name=".ui.activity.IOTestActivity"/>
 
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
@@ -68,6 +73,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <service android:name=".utils.udp.UdpReceiverService"/>
     </application>
 
 </manifest>
