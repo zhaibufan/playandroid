@@ -9,7 +9,7 @@ import okhttp3.Response;
 /**
  * 有网络时的策略
  *
- *     onlineCacheTime表示缓存过期时间，如果设置为0表示每次请求都直接从网络获取数据，
+ *     onlineCacheTime表示缓存过期时间，单位是秒，如果设置为0表示每次请求都直接从网络获取数据，
  *     非0则表示在该时间内读取缓存，超过则再从网络获取
  */
 public class NetCacheInterceptor implements Interceptor {
