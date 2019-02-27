@@ -5,7 +5,7 @@ import android.content.Intent;
 import com.study.zhai.playandroid.MainActivity;
 import com.study.zhai.playandroid.R;
 import com.study.zhai.playandroid.base.BaseActivity;
-import com.study.zhai.playandroid.utils.udp.UdpReceiverService;
+import com.study.zhai.playandroid.service.UdpReceiverService;
 
 import java.util.concurrent.TimeUnit;
 

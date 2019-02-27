@@ -20,6 +20,7 @@ import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.ui.activity.UDPTestActivity;
+import com.study.zhai.playandroid.ui.activity.WebSocketActivity;
 import com.study.zhai.playandroid.utils.NetUtils;
 import com.study.zhai.playandroid.utils.StatusBarUtils;
 
@@ -99,6 +100,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void ioTest(View view) {
         startActivity(new Intent(this, IOTestActivity.class));
+    }
+
+    public void webSocket(View view) {
+        startActivity(new Intent(this, WebSocketActivity.class));
     }
 
     private void requestPermission() {

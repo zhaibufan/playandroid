@@ -12,7 +12,7 @@ import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.utils.udp.SendBroadUdp;
 import com.study.zhai.playandroid.utils.udp.SendGroupUdp;
 import com.study.zhai.playandroid.utils.udp.TcpReceive;
-import com.study.zhai.playandroid.utils.udp.UdpReceiverService;
+import com.study.zhai.playandroid.service.UdpReceiverService;
 
 public class UDPTestActivity extends BaseActivity {
 

@@ -1,4 +1,4 @@
-package com.study.zhai.playandroid.utils.udp;
+package com.study.zhai.playandroid.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -182,4 +182,9 @@ public class UdpReceiverService extends Service {
         return String.valueOf(ipAddress);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopSelf();
+    }
 }

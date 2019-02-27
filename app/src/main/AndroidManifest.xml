@@ -56,6 +56,7 @@
         <activity android:name=".ui.activity.RecordVideoActivity"/>
         <activity android:name=".ui.activity.UDPTestActivity"/>
         <activity android:name=".ui.activity.IOTestActivity"/>
+        <activity android:name=".ui.activity.WebSocketActivity"/>
 
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
@@ -73,7 +74,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service android:name=".utils.udp.UdpReceiverService"/>
+        <service android:name=".service.UdpReceiverService"/>
+        <service android:name=".service.WebSocketService"/>
     </application>
 
 </manifest>
