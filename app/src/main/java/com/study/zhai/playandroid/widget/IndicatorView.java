@@ -13,7 +13,7 @@ import com.study.zhai.playandroid.utils.DpToPxUtils;
 import java.util.ArrayList;
 
 /**
- * 自定义ViewPager的指示器
+ * 自定义轮播图的指示器
  */
 public class IndicatorView extends LinearLayout {
 
@@ -92,7 +92,7 @@ public class IndicatorView extends LinearLayout {
      */
     public void playByStartPointToNext(int startPosition, int nextPosition) {
         if (startPosition < 0 || nextPosition < 0 || nextPosition == startPosition) {
-            startPosition = nextPosition = 0;
+            return;
         }
         final ImageView ivStart = (ImageView) mImageViews.get(startPosition);
         final ImageView ivNext = (ImageView) mImageViews.get(nextPosition);
