@@ -59,4 +59,9 @@ public class TestActivity extends BaseResultActivity implements HomeListContract
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    @Override
+    public void showCommonView() {
+
+    }
 }

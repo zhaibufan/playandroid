@@ -3,7 +3,6 @@ package com.study.zhai.playandroid.presenter;
 import com.google.gson.JsonObject;
 import com.study.zhai.playandroid.api.ApiService;
 import com.study.zhai.playandroid.api.ApiStore;
-import com.study.zhai.playandroid.base.BasePresenter;
 import com.study.zhai.playandroid.contract.HomeListContract;
 
 import io.reactivex.Observer;
@@ -11,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ArticleListPre extends BasePresenter<HomeListContract.View> implements HomeListContract.Presenter{
+public class ArticleListPre extends CommonPresenter<HomeListContract.View> implements HomeListContract.Presenter{
 
     @Override
     public void getArticleList(int num) {
