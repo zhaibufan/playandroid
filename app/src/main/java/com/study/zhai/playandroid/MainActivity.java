@@ -15,6 +15,7 @@ import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
+import com.study.zhai.playandroid.ui.activity.PullRefreshActivity;
 import com.study.zhai.playandroid.ui.activity.RecordVideoActivity;
 import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
@@ -104,6 +105,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void webSocket(View view) {
         startActivity(new Intent(this, WebSocketActivity.class));
+    }
+
+    public void pullRefresh(View view) {
+        startActivity(new Intent(this, PullRefreshActivity.class));
     }
 
     private void requestPermission() {

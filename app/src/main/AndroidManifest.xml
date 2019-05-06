@@ -57,6 +57,7 @@
         <activity android:name=".ui.activity.UDPTestActivity"/>
         <activity android:name=".ui.activity.IOTestActivity"/>
         <activity android:name=".ui.activity.WebSocketActivity"/>
+        <activity android:name=".ui.activity.PullRefreshActivity"/>
 
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
