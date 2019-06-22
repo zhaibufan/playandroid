@@ -18,6 +18,7 @@ import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
 import com.study.zhai.playandroid.ui.activity.PullRefreshActivity;
 import com.study.zhai.playandroid.ui.activity.RecordVideoActivity;
 import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
+import com.study.zhai.playandroid.ui.activity.RecyclerActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.ui.activity.UDPTestActivity;
@@ -109,6 +110,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void pullRefresh(View view) {
         startActivity(new Intent(this, PullRefreshActivity.class));
+    }
+
+    public void rv(View view) {
+        startActivity(new Intent(this, RecyclerActivity.class));
     }
 
     private void requestPermission() {

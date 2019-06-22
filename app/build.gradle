@@ -68,4 +68,5 @@ dependencies {
     implementation 'com.googlecode.mp4parser:isoparser:1.1.21'
     //webSocket
     implementation files('libs/autobahn-0.5.0.jar')
+    implementation 'com.zhouyou:easyrecyclerview:1.0.6'
 }
