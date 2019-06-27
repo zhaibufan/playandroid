@@ -22,7 +22,7 @@ public class WebSocketService extends Service {
     public static WebSocketConnection webSocketConnection;
     private WebSocketOptions options = new WebSocketOptions();
     private MyWebSocketHandler socketHandler;
-    private String mSocketHost = "ws://217.160.11.198:9053";
+    private String mSocketHost = "ws://10.8.23.2:8088/websocket/jiji"; //ws://message.aoliliya.com/messages/websocket
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @Override
