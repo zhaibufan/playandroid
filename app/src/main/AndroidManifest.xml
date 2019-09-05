@@ -59,6 +59,7 @@
         <activity android:name=".ui.activity.WebSocketActivity"/>
         <activity android:name=".ui.activity.PullRefreshActivity"/>
         <activity android:name=".ui.activity.RecyclerActivity"/>
+        <activity android:name=".ui.activity.DataBindingTestActivity"/>
 
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">

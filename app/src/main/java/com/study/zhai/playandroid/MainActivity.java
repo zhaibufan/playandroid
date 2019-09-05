@@ -9,6 +9,7 @@ import android.view.View;
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
+import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.IOTestActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
@@ -114,6 +115,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void rv(View view) {
         startActivity(new Intent(this, RecyclerActivity.class));
+    }
+
+    public void dataBinding(View view) {
+        startActivity(new Intent(this, DataBindingTestActivity.class));
     }
 
     private void requestPermission() {
