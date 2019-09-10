@@ -1,31 +1,6 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# ---------------------------------------基本(通用的)---------------------------------------
 #
-#-------------------------------------------基本不用动区域----------------------------------------------
-#
-#
-# -----------------------------基本 -----------------------------
-#
-
 # 指定代码的压缩级别 0 - 7(指定代码进行迭代优化的次数，在Android里面默认是5，这条指令也只有在可以优化时起作用。)
 -optimizationpasses 5
 # 混淆时不会产生形形色色的类名(混淆时不使用大小写混合类名)
@@ -61,10 +36,10 @@
  # 包含有类名->混淆后类名的映射关系
 -verbose
 
+
 #
-# ----------------------------- 默认保留 -----------------------------
+# -------------------------------------- 默认保留(基本也是通用的) ----------------------------------------
 #
-#----------------------------------------------------
 # 保持哪些类不被混淆
 #继承activity,application,service,broadcastReceiver,contentprovider....不进行混淆
 -keep public class * extends android.app.Activity
@@ -78,19 +53,15 @@
 -keep public class * extends android.view.View
 -keep class android.support.** {*;}## 保留support下的所有类及其内部类
 
-#----------------------------------------------------
-
 # 保留继承的
 -keep public class * extends android.support.v4.**
 -keep public class * extends android.support.v7.**
 -keep public class * extends android.support.annotation.**
 
-
 #表示不混淆任何包含native方法的类的类名以及native方法名，这个和我们刚才验证的结果是一致
 -keepclasseswithmembernames class * {
     native <methods>;
 }
-
 
 #这个主要是在layout 中写的onclick方法android:onclick="onClick"，不进行混淆
 #表示不混淆Activity中参数是View的方法，因为有这样一种用法，在XML中配置android:onClick=”buttonClick”属性，
@@ -157,6 +128,8 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
+
+
 #
 #----------------------------- WebView(项目中没有可以忽略) -----------------------------
 #
@@ -173,15 +146,31 @@
 -keepclassmembers class com.ljd.example.JSInterface {
     <methods>;
 }
+#在app中与HTML5的JavaScript的交互进行特殊处理
+#我们需要确保这些js要调用的原生方法不能够被混淆，于是我们需要做如下处理：
+-keepclassmembers class com.ljd.example.JSInterface {
+    <methods>;
+}
+
+
 
 #
-#---------------------------------实体类---------------------------------
+#---------------------------------实体类(根据具体项目更改路径)---------------------------------
 #--------(实体Model不能混淆，否则找不到对应的属性获取不到值)-----
 #
--dontwarn com.study.zhai.playandroid.bean.**
-#
-# ----------------------------- 其他的 -----------------------------
-#
+-keep class com.beyondsoft.app.zhishijia.mvp.bean.** { *; }
+-keep class com.beyondsoft.app.zhishijia.account.bean.**{ *; }
+-keep class com.beyondsoft.app.zhishijia.home.bean.**{ *; }
+-keep class com.beyondsoft.app.zhishijia.find.bean.**{ *; }
+-keep class com.beyondsoft.app.zhishijia.scene.bean.**{ *; }
+-keep class com.beyondsoft.app.zhishijia.event.** { *; }
+-keep class com.beyondsoft.app.zhishijia.base.BaseBean{*;}
+-keep class com.beyondsoft.app.zhishijia.base.BaseResponse{*;}
+-keep class com.beyondsoft.app.zhishijia.base.BaseResponse2{*;}
+
+
+
+# --------------------------------------- 其他的 ------------------------------------
 # 删除代码中Log相关的代码
 -assumenosideeffects class android.util.Log {
     public static boolean isLoggable(java.lang.String, int);
@@ -191,7 +180,6 @@
     public static int d(...);
     public static int e(...);
 }
-
 # 保持测试相关的代码
 -dontnote junit.framework.**
 -dontnote junit.runner.**
@@ -200,14 +188,55 @@
 -dontwarn org.junit.**
 
 
-#
-# ----------------------------- 第三方 -----------------------------
-#
--dontwarn com.orhanobut.logger.**
--keep class com.orhanobut.logger.**{*;}
--keep interface com.orhanobut.logger.**{*;}
 
+#
+# ------------------------- 第三方(根据项目实际用到的第三方库做混淆) -----------------------
+#
 -dontwarn com.google.gson.**
 -keep class com.google.gson.**{*;}
 -keep interface com.google.gson.**{*;}
-#        。。。。。。
+
+#EventBus
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+#butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+#retrofit2 okHttp
+-dontwarn retrofit2.**
+-dontwarn org.codehaus.mojo.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+-keepattributes *Annotation*
+-keepattributes RuntimeVisibleAnnotations
+-keepattributes RuntimeInvisibleAnnotations
+-keepattributes RuntimeVisibleParameterAnnotations
+-keepattributes RuntimeInvisibleParameterAnnotations
+-keepattributes EnclosingMethod
+-keepclasseswithmembers class * {
+@retrofit2.* <methods>;
+}
+-keepclasseswithmembers interface * {
+@retrofit2.* <methods>;
+}
+
+#glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
