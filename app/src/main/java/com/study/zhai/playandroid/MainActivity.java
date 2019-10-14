@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.log.LogUtils;
+import com.study.zhai.playandroid.ui.activity.ChartActivity;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
@@ -119,6 +120,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void dataBinding(View view) {
         startActivity(new Intent(this, DataBindingTestActivity.class));
+    }
+
+    public void chartUI(View view) {
+        startActivity(new Intent(this, ChartActivity.class));
     }
 
     private void requestPermission() {

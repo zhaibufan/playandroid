@@ -7,10 +7,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -20,47 +20,50 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="design_width_in_dp"
-            android:value="375"/>
+            android:value="375" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="667"/>
+            android:value="667" />
 
         <activity
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/StatusBarTranslucentTheme"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/StatusBarTranslucentTheme" />
         <activity android:name=".ui.activity.DownloadActivity" />
-        <activity android:name=".ui.activity.TestActivity"/>
-        <activity android:name=".ui.activity.SettingPhotoActivity"/>
-        <activity android:name=".ui.activity.ProgressBarActivity"/>
-        <activity android:name=".ui.activity.CustomCameraActivity"
-            android:theme="@style/StatusBarTranslucentTheme"
+        <activity android:name=".ui.activity.TestActivity" />
+        <activity android:name=".ui.activity.SettingPhotoActivity" />
+        <activity android:name=".ui.activity.ProgressBarActivity" />
+        <activity
+            android:name=".ui.activity.CustomCameraActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name=".ui.activity.PagerTestActivity"/>
-        <activity android:name=".ui.activity.PropertyAnimationEntryActivity"/>
-        <activity android:name=".ui.activity.CountDownActivity"/>
-        <activity android:name=".ui.activity.BallsFallDownActivity"/>
-        <activity android:name=".ui.activity.RecordingAnimalActivity"/>
+            android:theme="@style/StatusBarTranslucentTheme" />
+        <activity android:name=".ui.activity.PagerTestActivity" />
+        <activity android:name=".ui.activity.PropertyAnimationEntryActivity" />
+        <activity android:name=".ui.activity.CountDownActivity" />
+        <activity android:name=".ui.activity.BallsFallDownActivity" />
+        <activity android:name=".ui.activity.RecordingAnimalActivity" />
         <activity android:name=".ui.activity.MediaSelectorTestActivity" />
-        <activity android:name=".ui.activity.RecordVideoActivity"/>
-        <activity android:name=".ui.activity.UDPTestActivity"/>
-        <activity android:name=".ui.activity.IOTestActivity"/>
-        <activity android:name=".ui.activity.WebSocketActivity"/>
-        <activity android:name=".ui.activity.PullRefreshActivity"/>
-        <activity android:name=".ui.activity.RecyclerActivity"/>
-        <activity android:name=".ui.activity.DataBindingTestActivity"/>
-
+        <activity android:name=".ui.activity.RecordVideoActivity" />
+        <activity android:name=".ui.activity.UDPTestActivity" />
+        <activity android:name=".ui.activity.IOTestActivity" />
+        <activity android:name=".ui.activity.WebSocketActivity" />
+        <activity android:name=".ui.activity.PullRefreshActivity" />
+        <activity android:name=".ui.activity.RecyclerActivity" />
+        <activity android:name=".ui.activity.DataBindingTestActivity" />
+        <activity android:name=".ui.activity.ChartActivity" />
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>
@@ -77,8 +80,20 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service android:name=".service.UdpReceiverService"/>
-        <service android:name=".service.WebSocketService"/>
+
+        <service android:name=".service.UdpReceiverService" />
+        <service android:name=".service.WebSocketService" />
+
+        <receiver android:name=".PlayAndroidWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.widget.STATUS_CHANGED"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/paly_android_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
