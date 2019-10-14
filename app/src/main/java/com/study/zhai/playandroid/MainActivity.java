@@ -25,6 +25,7 @@ import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
 import com.study.zhai.playandroid.ui.activity.UDPTestActivity;
 import com.study.zhai.playandroid.ui.activity.WebSocketActivity;
+import com.study.zhai.playandroid.ui.activity.WindowManagerActivity;
 import com.study.zhai.playandroid.utils.NetUtils;
 import com.study.zhai.playandroid.utils.StatusBarUtils;
 
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     private static final String TAG = "MainActivity";
     private String[] permission = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.SYSTEM_ALERT_WINDOW};
     private static final int APPLY_PERMISSION_CODE = 200;
 
     @Override
@@ -124,6 +125,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void chartUI(View view) {
         startActivity(new Intent(this, ChartActivity.class));
+    }
+
+    public void createWindow(View view) {
+        startActivity(new Intent(this, WindowManagerActivity.class));
     }
 
     private void requestPermission() {
