@@ -7,7 +7,9 @@ import com.study.zhai.playandroid.contract.HomeListContract;
 import com.study.zhai.playandroid.log.LogUtils;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ArticleListPre extends CommonPresenter<HomeListContract.View> implements HomeListContract.Presenter{
 
@@ -19,6 +21,8 @@ public class ArticleListPre extends CommonPresenter<HomeListContract.View> imple
 
         ApiStore.createApi(ApiService.class)
                 .getArticleList(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JsonObject>() {
                     @Override
                     public void onSubscribe(Disposable d) {
