@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.lifecycle.LifecycleActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.ChartActivity;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
@@ -129,6 +130,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void createWindow(View view) {
         startActivity(new Intent(this, WindowManagerActivity.class));
+    }
+    public void testLifecycle(View view) {
+        startActivity(new Intent(this, LifecycleActivity.class));
     }
 
     private void requestPermission() {

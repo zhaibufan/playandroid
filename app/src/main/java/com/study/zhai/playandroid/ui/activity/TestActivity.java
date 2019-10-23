@@ -12,7 +12,7 @@ import com.study.zhai.playandroid.utils.ZToast;
 
 public class TestActivity extends BaseResultActivity implements HomeListContract.View {
 
-    private static final String TAG = "TestActivity";
+    private static final String TAG = "LifecycleActivity";
     private ArticleListPre pre;
 
     @Override

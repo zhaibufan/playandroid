@@ -66,6 +66,7 @@
         <activity android:name=".ui.activity.DataBindingTestActivity" />
         <activity android:name=".ui.activity.ChartActivity" />
         <activity android:name=".ui.activity.WindowManagerActivity"/>
+        <activity android:name=".lifecycle.LifecycleActivity"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>
