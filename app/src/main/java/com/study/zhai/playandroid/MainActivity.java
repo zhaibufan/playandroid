@@ -2,11 +2,15 @@ package com.study.zhai.playandroid;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 
 import com.study.zhai.playandroid.base.BaseActivity;
+import com.study.zhai.playandroid.broadcast.MonitorReceiver;
 import com.study.zhai.playandroid.lifecycle.LifecycleActivity;
 import com.study.zhai.playandroid.log.LogUtils;
 import com.study.zhai.playandroid.ui.activity.ChartActivity;
@@ -59,6 +63,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     public void initData() {
         requestPermission();
+//        startBro();
     }
 
     public void mvpTest(View view) {
@@ -69,7 +74,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         startActivity(new Intent(this, DownloadActivity.class));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void settingPhoto(View v) {
+//        startService(new Intent(this, DaemonService.class));
         startActivity(new Intent(this, SettingPhotoActivity.class));
     }
 
@@ -195,5 +202,24 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         if (netStatus == NetUtils.NETWORK_WIFI) {
             LogUtils.d("当前网络 wifi");
         }
+    }
+
+    private void startBro() {
+        MonitorReceiver receiver = new MonitorReceiver();
+            IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction("android.intent.action.USER_PRESENT");
+    intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+    intentFilter.addAction("android.intent.action.MEDIA_MOUNTED");
+    intentFilter.addAction("android.intent.action.MEDIA_UNMOUNTED");
+    intentFilter.addAction("android.intent.action.SCREEN_ON");
+    intentFilter.addAction("android.intent.action.SCREEN_OFF");
+    intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+    intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+    intentFilter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
+    intentFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
+    try {
+        this.registerReceiver(receiver, intentFilter);
+    } catch (Exception e) {
+    }
     }
 }
