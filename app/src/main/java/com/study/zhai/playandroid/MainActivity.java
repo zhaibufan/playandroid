@@ -14,6 +14,7 @@ import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.IOTestActivity;
+import com.study.zhai.playandroid.ui.activity.LocationActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
@@ -133,6 +134,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
     public void testLifecycle(View view) {
         startActivity(new Intent(this, LifecycleActivity.class));
+    }
+
+    public void testLocation(View view) {
+        startActivity(new Intent(this, LocationActivity.class));
     }
 
     private void requestPermission() {

@@ -7,11 +7,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
     <application
         android:name=".MyApplication"
@@ -67,6 +69,7 @@
         <activity android:name=".ui.activity.ChartActivity" />
         <activity android:name=".ui.activity.WindowManagerActivity"/>
         <activity android:name=".lifecycle.LifecycleActivity"/>
+        <activity android:name=".ui.activity.LocationActivity"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>
