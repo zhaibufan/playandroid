@@ -29,6 +29,7 @@ import com.study.zhai.playandroid.ui.activity.RecordingAnimalActivity;
 import com.study.zhai.playandroid.ui.activity.RecyclerActivity;
 import com.study.zhai.playandroid.ui.activity.SettingPhotoActivity;
 import com.study.zhai.playandroid.ui.activity.TestActivity;
+import com.study.zhai.playandroid.ui.activity.TestConcurrencyActivity;
 import com.study.zhai.playandroid.ui.activity.UDPTestActivity;
 import com.study.zhai.playandroid.ui.activity.WebSocketActivity;
 import com.study.zhai.playandroid.ui.activity.WindowManagerActivity;
@@ -145,6 +146,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void testLocation(View view) {
         startActivity(new Intent(this, LocationActivity.class));
+    }
+
+    public void testJava(View view) {
+        startActivity(new Intent(this, TestConcurrencyActivity.class));
     }
 
     private void requestPermission() {
