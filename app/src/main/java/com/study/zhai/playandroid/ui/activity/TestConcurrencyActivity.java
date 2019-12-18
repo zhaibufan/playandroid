@@ -31,7 +31,7 @@ public class TestConcurrencyActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        ThreadLocal<String> s = new ThreadLocal<>();
     }
 
     public void test(View view) {
