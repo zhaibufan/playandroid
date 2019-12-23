@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
 
     <application
@@ -72,6 +73,7 @@
         <activity android:name=".lifecycle.LifecycleActivity"/>
         <activity android:name=".ui.activity.LocationActivity"/>
         <activity android:name=".ui.activity.TestConcurrencyActivity"/>
+        <activity android:name=".ui.activity.KeepAliveActivity"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>

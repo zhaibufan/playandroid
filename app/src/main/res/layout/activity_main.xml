@@ -120,6 +120,11 @@
                 android:layout_height="wrap_content"
                 android:text="测试Java并发"
                 android:onClick="testJava"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="后台运行白名单，实现保活"
+                android:onClick="whiteList"/>
         </LinearLayout>
 
     </ScrollView>

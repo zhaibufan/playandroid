@@ -18,6 +18,7 @@ import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.IOTestActivity;
+import com.study.zhai.playandroid.ui.activity.KeepAliveActivity;
 import com.study.zhai.playandroid.ui.activity.LocationActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
@@ -150,6 +151,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void testJava(View view) {
         startActivity(new Intent(this, TestConcurrencyActivity.class));
+    }
+
+    public void whiteList(View view) {
+        startActivity(new Intent(this, KeepAliveActivity.class));
     }
 
     private void requestPermission() {
