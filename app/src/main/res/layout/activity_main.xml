@@ -125,6 +125,13 @@
                 android:layout_height="wrap_content"
                 android:text="后台运行白名单，实现保活"
                 android:onClick="whiteList"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RVBanner"
+                android:onClick="rvBanner"/>
+
         </LinearLayout>
 
     </ScrollView>

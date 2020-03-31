@@ -1,6 +1,7 @@
 package com.study.zhai.playandroid;
 
 import android.app.Application;
+import android.support.multidex.MultiDex;
 
 import com.study.zhai.playandroid.log.LogUtils;
 
@@ -19,6 +20,8 @@ public class MyApplication extends Application {
         super.onCreate();
         myApplication = this;
         LogUtils.init(true);
+
+        MultiDex.install(this);
         // AndroidAutoSize默认是以宽度为基准就行适配的，改方法是设置以高度为基准
         AutoSizeConfig.getInstance().setBaseOnWidth(false);
     }

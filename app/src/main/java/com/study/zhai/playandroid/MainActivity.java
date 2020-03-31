@@ -13,6 +13,7 @@ import com.study.zhai.playandroid.base.BaseActivity;
 import com.study.zhai.playandroid.broadcast.MonitorReceiver;
 import com.study.zhai.playandroid.lifecycle.LifecycleActivity;
 import com.study.zhai.playandroid.log.LogUtils;
+import com.study.zhai.playandroid.ui.activity.BannerActivity;
 import com.study.zhai.playandroid.ui.activity.ChartActivity;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
@@ -155,6 +156,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void whiteList(View view) {
         startActivity(new Intent(this, KeepAliveActivity.class));
+    }
+
+    public void rvBanner(View view) {
+        startActivity(new Intent(this, BannerActivity.class));
     }
 
     private void requestPermission() {

@@ -1,7 +1,6 @@
 package com.study.zhai.playandroid.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.study.zhai.playandroid.R
 import com.study.zhai.playandroid.base.BaseActivity
 import com.study.zhai.playandroid.bean.ChartBean
@@ -31,7 +30,7 @@ class ChartActivity : BaseActivity() {
 
         rvChart = findViewById<XRecyclerView>(R.id.rv_chart)
         rvChart.run {
-            layoutManager = mLayoutManager as RecyclerView.LayoutManager?
+            layoutManager = mLayoutManager
             adapter = mAdapter
         }
 

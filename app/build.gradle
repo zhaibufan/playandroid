@@ -50,11 +50,11 @@ android {
         abortOnError false
     }
 
-//    kotlin{
-//        experimental {
-//            coroutines 'enable'
-//        }
-//    }
+    kotlin{
+        experimental {
+            coroutines 'enable'
+        }
+    }
 }
 
 dependencies {
@@ -99,4 +99,7 @@ dependencies {
 
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+
 }
