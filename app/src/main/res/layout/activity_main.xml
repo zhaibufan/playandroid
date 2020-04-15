@@ -132,6 +132,12 @@
                 android:text="RVBanner"
                 android:onClick="rvBanner"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fishView"
+                android:onClick="fishView"/>
+
         </LinearLayout>
 
     </ScrollView>

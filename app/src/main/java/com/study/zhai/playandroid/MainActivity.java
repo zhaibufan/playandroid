@@ -18,6 +18,7 @@ import com.study.zhai.playandroid.ui.activity.ChartActivity;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
+import com.study.zhai.playandroid.ui.activity.FishActivity;
 import com.study.zhai.playandroid.ui.activity.IOTestActivity;
 import com.study.zhai.playandroid.ui.activity.KeepAliveActivity;
 import com.study.zhai.playandroid.ui.activity.LocationActivity;
@@ -160,6 +161,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void rvBanner(View view) {
         startActivity(new Intent(this, BannerActivity.class));
+    }
+
+    public void fishView(View view) {
+        startActivity(new Intent(this, FishActivity.class));
     }
 
     private void requestPermission() {

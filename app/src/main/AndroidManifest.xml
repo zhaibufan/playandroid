@@ -75,6 +75,7 @@
         <activity android:name=".ui.activity.TestConcurrencyActivity"/>
         <activity android:name=".ui.activity.KeepAliveActivity"/>
         <activity android:name=".ui.activity.BannerActivity"/>
+        <activity android:name=".ui.activity.FishActivity"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>
