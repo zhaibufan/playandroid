@@ -8,4 +8,5 @@ public class Test {
 
     public static final int i = 0;
     public static final int j = 0;
+    public static final int k = 0;
 }
