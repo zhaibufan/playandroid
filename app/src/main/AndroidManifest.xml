@@ -76,6 +76,8 @@
         <activity android:name=".ui.activity.KeepAliveActivity"/>
         <activity android:name=".ui.activity.BannerActivity"/>
         <activity android:name=".ui.activity.FishActivity"/>
+        <activity android:name=".ui.activity.PlayVedioActivity"/>
+        <activity android:name=".widget.PlayVedioActivity2"/>
 
         <receiver android:name=".broadcast.NetBroadcastReceiver">
             <intent-filter>

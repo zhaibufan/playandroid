@@ -137,6 +137,11 @@
                 android:layout_height="wrap_content"
                 android:text="fishView"
                 android:onClick="fishView"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fishView"
+                android:onClick="playVideo"/>
 
         </LinearLayout>
 

@@ -24,6 +24,7 @@ import com.study.zhai.playandroid.ui.activity.KeepAliveActivity;
 import com.study.zhai.playandroid.ui.activity.LocationActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
+import com.study.zhai.playandroid.ui.activity.PlayVedioActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
 import com.study.zhai.playandroid.ui.activity.PullRefreshActivity;
@@ -165,6 +166,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     public void fishView(View view) {
         startActivity(new Intent(this, FishActivity.class));
+    }
+
+    public void playVideo(View view) {
+        startActivity(new Intent(this, PlayVedioActivity.class));
     }
 
 
