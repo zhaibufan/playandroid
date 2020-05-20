@@ -144,6 +144,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     public void createWindow(View view) {
         startActivity(new Intent(this, WindowManagerActivity.class));
     }
+
     public void testLifecycle(View view) {
         startActivity(new Intent(this, LifecycleActivity.class));
     }
@@ -231,20 +232,20 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     private void startBro() {
         MonitorReceiver receiver = new MonitorReceiver();
-            IntentFilter intentFilter = new IntentFilter();
-    intentFilter.addAction("android.intent.action.USER_PRESENT");
-    intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-    intentFilter.addAction("android.intent.action.MEDIA_MOUNTED");
-    intentFilter.addAction("android.intent.action.MEDIA_UNMOUNTED");
-    intentFilter.addAction("android.intent.action.SCREEN_ON");
-    intentFilter.addAction("android.intent.action.SCREEN_OFF");
-    intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-    intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-    intentFilter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
-    intentFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
-    try {
-        this.registerReceiver(receiver, intentFilter);
-    } catch (Exception e) {
-    }
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.USER_PRESENT");
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        intentFilter.addAction("android.intent.action.MEDIA_MOUNTED");
+        intentFilter.addAction("android.intent.action.MEDIA_UNMOUNTED");
+        intentFilter.addAction("android.intent.action.SCREEN_ON");
+        intentFilter.addAction("android.intent.action.SCREEN_OFF");
+        intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+        intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+        intentFilter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
+        intentFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
+        try {
+            this.registerReceiver(receiver, intentFilter);
+        } catch (Exception e) {
+        }
     }
 }
