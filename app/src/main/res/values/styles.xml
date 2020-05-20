@@ -42,4 +42,15 @@
     <style name="StatusBarTranslucentTheme" parent="AppTheme">
     </style>
 
+    <style name="MyDialog" parent="AppTheme">
+        <!--背景色,此处的背景色请一定要设置为透明度背景色-->
+        <item name="android:windowBackground">@color/popup_window</item>
+        <!--window Is Translucent 窗口是半透明的-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--window No Title窗口无标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--弹出动画-->
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
 </resources>

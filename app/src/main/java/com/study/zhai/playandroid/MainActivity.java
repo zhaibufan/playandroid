@@ -17,6 +17,7 @@ import com.study.zhai.playandroid.ui.activity.BannerActivity;
 import com.study.zhai.playandroid.ui.activity.ChartActivity;
 import com.study.zhai.playandroid.ui.activity.CustomCameraActivity;
 import com.study.zhai.playandroid.ui.activity.DataBindingTestActivity;
+import com.study.zhai.playandroid.ui.activity.DialogActivity;
 import com.study.zhai.playandroid.ui.activity.DownloadActivity;
 import com.study.zhai.playandroid.ui.activity.FishActivity;
 import com.study.zhai.playandroid.ui.activity.IOTestActivity;
@@ -24,7 +25,6 @@ import com.study.zhai.playandroid.ui.activity.KeepAliveActivity;
 import com.study.zhai.playandroid.ui.activity.LocationActivity;
 import com.study.zhai.playandroid.ui.activity.MediaSelectorTestActivity;
 import com.study.zhai.playandroid.ui.activity.PagerTestActivity;
-import com.study.zhai.playandroid.ui.activity.PlayVedioActivity;
 import com.study.zhai.playandroid.ui.activity.ProgressBarActivity;
 import com.study.zhai.playandroid.ui.activity.PropertyAnimationEntryActivity;
 import com.study.zhai.playandroid.ui.activity.PullRefreshActivity;
@@ -169,9 +169,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
     public void playVideo(View view) {
-        startActivity(new Intent(this, PlayVedioActivity.class));
+        startActivity(new Intent(this, DialogActivity.class));
     }
-
 
     private void requestPermission() {
         if (!EasyPermissions.hasPermissions(this, permission)) {

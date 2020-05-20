@@ -55,7 +55,6 @@ public class PlayVedioActivity extends AppCompatActivity {
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);      //设置视频流类型
-
         CreateSurface();
     }
 
